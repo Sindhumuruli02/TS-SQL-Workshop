@@ -1,3 +1,6 @@
+import * as readline from 'readline-sync';
+
+
 interface Product {
     id: number;
     name: string;
@@ -34,40 +37,30 @@ class FeedbackImpl implements Feedback {
     }
 }
 
-
 function addProduct(products: Product[], id: number, name: string): void {
     products.push({ id, name });
 }
+
 
 function addReview(feedback: Feedback, id: number, productId: number, rating: number, comment: string): void {
     feedback.addReview({ id, productId, rating, comment });
 }
 
-function getUserInput(prompt: string): string {
-    
-    const inputs = {
-        "Enter product ID:": "1",
-        "Enter product name:": "Smartphone",
-        "Enter review ID:": "1",
-        "Enter product ID for review:": "1",
-        "Enter rating (0-5):": "5",
-        "Enter comment:": "Excellent product!"
-    };
-    return inputs[prompt];
-}
 
 function main() {
     const products: Product[] = [];
     const feedback: Feedback = new FeedbackImpl();
 
-    const productId = parseInt(getUserInput("Enter product ID:"));
-    const productName = getUserInput("Enter product name:");
+    
+    const productId = parseInt(readline.question("Enter product ID: "));
+    const productName = readline.question("Enter product name: ");
     addProduct(products, productId, productName);
 
-    const reviewId = parseInt(getUserInput("Enter review ID:"));
-    const reviewProductId = parseInt(getUserInput("Enter product ID for review:"));
-    const rating = parseInt(getUserInput("Enter rating (0-5):"));
-    const comment = getUserInput("Enter comment:");
+  
+    const reviewId = parseInt(readline.question("Enter review ID: "));
+    const reviewProductId = parseInt(readline.question("Enter product ID for review: "));
+    const rating = parseInt(readline.question("Enter rating (0-5): "));
+    const comment = readline.question("Enter comment: ");
     addReview(feedback, reviewId, reviewProductId, rating, comment);
 
    

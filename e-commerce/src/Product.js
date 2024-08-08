@@ -15,12 +15,36 @@ var FeedbackImpl = /** @class */ (function () {
     };
     return FeedbackImpl;
 }());
-var Dress = { id: 1, name: "Dress" };
-var Jeans = { id: 2, name: "Jeans" };
-var feedback = new FeedbackImpl();
-feedback.addReview({ id: 1, productId: 1, rating: 5, comment: "Excellent product!" });
-feedback.addReview({ id: 2, productId: 1, rating: 4, comment: "Very good." });
-feedback.addReview({ id: 3, productId: 2, rating: 3, comment: "Average product." });
-console.log("Reviews for Dress:");
-feedback.getReviewsByProduct(1).forEach(function (review) { return console.log(review.comment); });
-console.log("Average rating for Dress:", feedback.getAverageRating(1));
+function addProduct(products, id, name) {
+    products.push({ id: id, name: name });
+}
+function addReview(feedback, id, productId, rating, comment) {
+    feedback.addReview({ id: id, productId: productId, rating: rating, comment: comment });
+}
+function getUserInput(prompt) {
+    var inputs = {
+        "Enter product ID:": "1",
+        "Enter product name:": "Smartphone",
+        "Enter review ID:": "1",
+        "Enter product ID for review:": "1",
+        "Enter rating (0-5):": "5",
+        "Enter comment:": "Excellent product!"
+    };
+    return inputs[prompt];
+}
+function main() {
+    var products = [];
+    var feedback = new FeedbackImpl();
+    var productId = parseInt(getUserInput("Enter product ID:"));
+    var productName = getUserInput("Enter product name:");
+    addProduct(products, productId, productName);
+    var reviewId = parseInt(getUserInput("Enter review ID:"));
+    var reviewProductId = parseInt(getUserInput("Enter product ID for review:"));
+    var rating = parseInt(getUserInput("Enter rating (0-5):"));
+    var comment = getUserInput("Enter comment:");
+    addReview(feedback, reviewId, reviewProductId, rating, comment);
+    console.log("Reviews for ".concat(productName, ":"));
+    feedback.getReviewsByProduct(productId).forEach(function (review) { return console.log(review.comment); });
+    console.log("Average rating for ".concat(productName, ":"), feedback.getAverageRating(productId));
+}
+main();
