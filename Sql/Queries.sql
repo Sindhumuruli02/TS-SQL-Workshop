@@ -1,3 +1,7 @@
+// Product and Feedback table to store feedback for product and fetech the average  rating product wise
+
+
+
 CREATE TABLE Product (
     id INT PRIMARY KEY,
     name VARCHAR(255) NOT NULL

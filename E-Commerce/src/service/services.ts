@@ -1,41 +1,8 @@
+import { Review } from "../model/model";
+import { Product } from "../model/model";
+import { Feedback } from "../model/model";
+import { FeedbackImpl } from "../model/model";
 import * as readline from 'readline-sync';
-
-
-interface Product {
-    id: number;
-    name: string;
-}
-
-interface Review {
-    id: number;
-    productId: number;
-    rating: number;
-    comment: string;
-}
-
-interface Feedback {
-    addReview(review: Review): void;
-    getReviewsByProduct(productId: number): Review[];
-    getAverageRating(productId: number): number;
-}
-
-class FeedbackImpl implements Feedback {
-    private reviews: Review[] = [];
-
-    addReview(review: Review): void {
-        this.reviews.push(review);
-    }
-
-    getReviewsByProduct(productId: number): Review[] {
-        return this.reviews.filter(review => review.productId === productId);
-    }
-
-    getAverageRating(productId: number): number {
-        const productReviews = this.getReviewsByProduct(productId);
-        const totalRating = productReviews.reduce((sum, review) => sum + review.rating, 0);
-        return productReviews.length ? totalRating / productReviews.length : 0;
-    }
-}
 
 function addProduct(products: Product[], id: number, name: string): void {
     products.push({ id, name });
