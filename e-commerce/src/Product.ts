@@ -38,7 +38,7 @@ class FeedbackImpl implements Feedback {
 
 const Dress: Product = { id: 1, name: "Dress" };
 const Jeans: Product = { id: 2, name: "Jeans" };
-const p3: Product = { id: 3, name: "p3" };
+const pant: Product = { id: 3, name: "pant" };
 const p4: Product = { id: 4, name: "p4" };
 const p5: Product = { id: 5, name: "p5" };
 const p6: Product = { id: 6, name: "p6" };
